@@ -490,8 +490,7 @@ def _large_indexing(request, file_format, collection_name, query=None, start_tim
     table_metadata = db.get_table(database=file_format['databaseName'], table_name=file_format['tableName'])
     input_path = table_metadata.path_location
   elif file_format['inputFormat'] == 'stream':
-    pass
-    #job_handle = _envelope_job(request, source, destination, start_time=start_time, lib_path=destination['indexerJobLibPath'])
+    return _envelope_job(request, file_format, collection_name, start_time=start_time, lib_path=lib_path)
   elif file_format['inputFormat'] == 'file':
     input_path = '${nameNode}%s' % urllib.unquote(file_format["path"])
   else:
